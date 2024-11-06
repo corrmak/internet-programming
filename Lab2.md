@@ -8,114 +8,114 @@
 
 ### Шаг 1: Создаём и запускаем контейнер с nginx
 Запустите контейнер с `nginx`:
-  bash
+  ```bash
   docker container run nginx
-
+  ```
 Docker загрузит образ nginx из Docker Hub и запустит его. 
 Контейнер будет запущен в режиме переднего плана. Чтобы выйти из него, нажмите Ctrl+C.
 
 ### Шаг 2: Проверка доступных образов
 Посмотрите существующие образы:
-  bash
+  ```bash
   docker images
-
+  ```
 Найдите образ с nginx и обратите внимание на колонку tag, дату создания и размер.
 
 ### Шаг 3: Запуск контейнера в фоновом режиме
 Запустите nginx в фоновом режиме:
-  bash
+  ```bash
   docker container run -d nginx
+  ```
 Или:
-  bash
+  ```bash
   docker container run --detached nginx
+  ```
 
 ### Шаг 4: Просмотр списка контейнеров
 Проверьте, какие контейнеры запущены:
-  bash
+  ```bash
   docker ps
-
+  ```
 Обратите внимание на поле name и ports.
 Для просмотра всех контейнеров (включая остановленные):
-  bash
+  ```bash
   docker ps -a
-
+  ```
 ### Шаг 5: Возобновление и остановка контейнеров
 Запустите ранее созданный контейнер nginx, указав его name или container_id, и проверьте его статус:
-  bash
+  ```bash
   docker start <name_container или container_id>
-
+  ```
 Остановите контейнер:
-  bash
+  ```bash
   docker stop <name_container или container_id>
-
+  ```
 ### Шаг 6: Удаление контейнеров и образа
 Удалите остановленные контейнеры:
-  bash
+  ```bash
   docker rm <container_id>
-
+  ```
 Удалите образ с nginx:
-  bash
+  ```bash
   docker rmi nginx
-
+  ```
 ### Шаг 7: Примаппинг порта и настройка перезапуска контейнера
 Создайте и запустите контейнер nginx с привязкой порта:
-  bash
+  ```bash
   docker container run -d -p 80:80 --name proxy nginx
-
+  ```
 Запустите контейнер с автоматическим перезапуском:
-  bash
+  ```bash
   docker container run -d -p 80:80 --name proxy --restart always nginx
-
+  ```
 
 ## Часть 2: Изменение стартовой страницы в контейнере nginx
 
 1. Зайдите внутрь контейнера nginx:
-  bash
+  ```bash
   docker container exec -it proxy /bin/bash
-
+  ```
 2. Перейдите в директорию, где находятся файлы сайта:
-  bash
+  ```bash
   cd /usr/share/nginx/html
-
+  ```
 3. Отредактируйте файл index.html (например, с помощью команды echo):
-   
-    bash
-    echo "Добро пожаловать на измененную страницу Nginx!": > index.html
-
+    ```bash
+    echo "<h1>Добро пожаловать на измененную страницу Nginx!<h1>":  index.html
+    ```
 5. Проверьте изменения, зайдя на страницу http://127.0.0.1:80/.
 
 6. Выйдите из контейнера:
-    bash
+   ```bash
     exit
-
+    ```
 ## Часть 3: Работа с образом apache
 
 ### Шаг 1: Создайте и запустите контейнер apache
 Запустите контейнер с apache:
-  bash
+  ```bash
   docker container run -d -p 8080:80 --name apache-server httpd
-
+  ```
 ### Шаг 2: Изменение стартовой страницы в контейнере apache
 
 1. Зайдите внутрь контейнера apache:
-  bash
+  ```bash
   docker container exec -it apache-server /bin/bash
-
+  ```
 2. Перейдите в директорию, где находятся файлы сайта:
-  bash
+  ```bash
   cd /usr/local/apache2/htdocs
-
+  ```
 3. Отредактируйте файл index.html:
-   
-    bash
-    echo "Добро пожаловать на измененную страницу Apache!" > index.html
-
+    ```bash
+    echo "<h1>Добро пожаловать на измененную страницу Apache!<h1>" index.html
+    ```
 5. Проверьте изменения, зайдя на страницу http://127.0.0.1:8080/.
 
 6. Выйдите из контейнера:
-  bash
+  ```bash
   exit
-
+  ```
 ## Заключение
 Эти практические примеры демонстрируют, как можно работать с веб-серверами nginx и apache в контейнерах Docker.
 Мы запустили контейнеры, изменили стартовые страницы и настроили автоперезапуск для веб-серверов. 
