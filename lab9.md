@@ -28,6 +28,7 @@
   ```
 ## 2. Установка NTP-сервера и настройка контейнеров
   Установка NTP-сервера
+  
   Создал контейнер на основе ubuntu для NTP-сервера:
   ```bash
   docker run -d --name ntp-server ubuntu:latest
@@ -35,6 +36,7 @@
   docker exec -it ntp-server service ntp start
   ```
   Настройка клиентов:
+  
   Созданы два контейнера, один на базе centos, другой на основе `alpine`:
   ```bash
   docker run -d --name centos-client centos:latest
@@ -81,13 +83,17 @@
   duplicity /data file:///backup
   duplicity restore file:///backup /data-restored
   ```
-  Velero: используется для резервного копирования кластеров Kubernetes. Пример резервного копирования:
+  Velero: используется для резервного копирования кластеров Kubernetes. 
+  
+  Пример резервного копирования:
   ```bash
   velero install --provider aws --bucket <bucket-name> --backup-location-config region=<region>
   velero backup create my-backup --include-namespaces <namespace-name>
   velero restore create --from-backup my-backup
   ```
-  Restic: используется для резервного копирования данных в файловую систему или облачные хранилища. Пример резервного копирования:
+  Restic: используется для резервного копирования данных в файловую систему или облачные хранилища. 
+  
+  Пример резервного копирования:
   ```bash
   restic init -r /backup
   restic backup /data --repo /backup
