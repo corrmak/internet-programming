@@ -27,7 +27,7 @@
   docker cp $(docker-compose ps -q backup):/backup/backup.tar.gz ./backup.tar.gz
   ```
 ## 2. Установка NTP-сервера и настройка контейнеров
-  Установка NTP-сервера:
+  Установка NTP-сервера
   Создал контейнер на основе ubuntu для NTP-сервера:
   ```bash
   docker run -d --name ntp-server ubuntu:latest
@@ -35,7 +35,7 @@
   docker exec -it ntp-server service ntp start
   ```
   Настройка клиентов:
-  Созданы два контейнера, один на базе centos, другой на основе alpine:
+  Созданы два контейнера, один на базе centos, другой на основе `alpine`:
   ```bash
   docker run -d --name centos-client centos:latest
   docker exec -it centos-client yum install -y ntpdate
@@ -60,13 +60,13 @@
   docker run -d --name ntp-server ntp-server-image
   ```
 ## 4. Резервное копирование и восстановление базы данных PostgreSQL
-  Резервное копирование:
+  Резервное копирование
   Создан контейнер PostgreSQL с volume для данных:
   ```bash
   docker run -d --name postgres-db -e POSTGRES_PASSWORD=example -v pgdata:/var/lib/postgresql/data postgres:latest
   docker exec -it postgres-db pg_dumpall -U postgres > backup.sql
   ```
-  Восстановление:
+  Восстановление
   Восстановление данных в новом контейнере:
   ```bash
   docker run -d --name postgres-db-new -e POSTGRES_PASSWORD=example postgres:latest
@@ -79,15 +79,13 @@
   duplicity /data file:///backup
   duplicity restore file:///backup /data-restored
   ```
-  Velero:
-  Velero используется для резервного копирования кластеров Kubernetes. Пример резервного копирования:
+  Velero: используется для резервного копирования кластеров Kubernetes. Пример резервного копирования:
   ```bash
   velero install --provider aws --bucket <bucket-name> --backup-location-config region=<region>
   velero backup create my-backup --include-namespaces <namespace-name>
   velero restore create --from-backup my-backup
   ```
-  Restic:
-  Restic используется для резервного копирования данных в файловую систему или облачные хранилища. Пример резервного копирования:
+  Restic: используется для резервного копирования данных в файловую систему или облачные хранилища. Пример резервного копирования:
   ```bash
   restic init -r /backup
   restic backup /data --repo /backup
