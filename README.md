@@ -4,4 +4,5 @@
 ## Содержание:
 1. Лабораторная работа № 1: **Install Docker и Installing docker into a minimal alpine image**.
 2. Лабораторная работа № 2: **Работа с веб-серверами nginx и apache в Docker**.
-3. Лабораторная работа 3: **Network, Regisry, Portainer**.
+3. Лабораторная работа № 3: **Network, Regisry, Portainer**.
+4. Лабораторная работа № 8: 
