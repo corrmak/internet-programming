@@ -61,12 +61,14 @@
   ```
 ## 4. Резервное копирование и восстановление базы данных PostgreSQL
   Резервное копирование
+  
   Создан контейнер PostgreSQL с volume для данных:
   ```bash
   docker run -d --name postgres-db -e POSTGRES_PASSWORD=example -v pgdata:/var/lib/postgresql/data postgres:latest
   docker exec -it postgres-db pg_dumpall -U postgres > backup.sql
   ```
-  Восстановление
+  Восстановление:
+  
   Восстановление данных в новом контейнере:
   ```bash
   docker run -d --name postgres-db-new -e POSTGRES_PASSWORD=example postgres:latest
