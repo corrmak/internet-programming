@@ -40,7 +40,8 @@
   docker run -d --name centos-client centos:latest
   docker exec -it centos-client yum install -y ntpdate
   docker exec -it centos-client ntpdate ntp-server
-
+  ```
+  ```
   docker run -d --name alpine-client alpine:latest
   docker exec -it alpine-client apk add ntp
   docker exec -it alpine-client ntpd -p ntp-server
